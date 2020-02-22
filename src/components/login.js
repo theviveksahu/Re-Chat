@@ -13,6 +13,7 @@ const baseURL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/'
             userInfo:{}
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(process.env.NODE_ENV);
     }
     handleSubmit = e => {
         e.preventDefault();

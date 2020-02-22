@@ -40,7 +40,7 @@ app.post('/saveConversation', (req, res) => {
 })
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(".../dist"));
+    app.use(express.static("../../dist"));
 }
 
 server.listen(port, () => console.log(`Re-Chat listening on port ${port}!`))
