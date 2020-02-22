@@ -10,12 +10,14 @@ import axios from 'axios';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 
 const { Sider, Header } = Layout;
+const baseURL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/' : 'http://rea-chat.herokuapp.com/';
+const port = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000'  : '/';
 
 
 class ChatBoard extends React.Component {
     constructor(props){
         super(props);
-        this.socket = io('localhost:3000');       
+        this.socket = io(port);       
         this.userInfo = {};
         this.state = {
             channels:[],
@@ -55,8 +57,9 @@ class ChatBoard extends React.Component {
     loadChannels() {
         axios({
             method:'GET',
+            baseURL: baseURL,
             //url:'http://localhost:3000/getChannelsByUser/' + userId,
-            url:'http://localhost:3000/getChannels',
+            url:'/getChannels',
             headers: { 'content-type':'Application/json' }
         })
         .then((res) => {
@@ -76,7 +79,8 @@ class ChatBoard extends React.Component {
     loadConversation(selectedChannel) {
         axios({
             method: 'GET',
-            url:'http://localhost:3000/getConversation/' + selectedChannel,
+            baseURL: baseURL,
+            url:'/getConversation/' + selectedChannel,
             headers: { 'content-type':'Application/json' },
 
         })
@@ -102,7 +106,8 @@ class ChatBoard extends React.Component {
         let createdBy  = this.userInfo.userId;
         axios({
             method:'POST',
-            url:'http://localhost:3000/createChannel',
+            baseURL: baseURL,
+            url:'/createChannel',
             headers: { 'content-type':'Application/json' },
             data: { channelName: this.state.channel, channelId: uuid(), createdBy: createdBy }
         })

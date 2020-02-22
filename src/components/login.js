@@ -4,6 +4,7 @@ import './../App.css';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 import axios from 'axios';
 const { Header, Content } = Layout;
+const baseURL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/' : 'http://rea-chat.herokuapp.com/'
 
  class LoginForm extends React.Component {
     constructor(props) {
@@ -19,7 +20,8 @@ const { Header, Content } = Layout;
           if (!err) {
             axios({
                 method:'POST',
-                url:'http://localhost:3000/login',
+                baseURL: baseURL,
+                url:'/login',
                 headers: { 'content-type':'Application/json' },
                 data: values
             })

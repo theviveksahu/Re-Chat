@@ -13,7 +13,7 @@ app.use(bodyParser.json({type:'application/json'}),cors());
 
 socket.socketConfig(io);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.post('/login', (req, res) => {
     db.connectDB('login', req, res);
